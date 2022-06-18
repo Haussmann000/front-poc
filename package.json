@@ -17,6 +17,7 @@
     "vue-slider-component": "^3.2.15",
     "vue-template-compiler": "^2.6.14",
     "vue-upload-component": "^2.8.22",
+    "vuedraggable": "^2.24.3",
     "vuetify": "^2.6.1",
     "webpack": "^4.46.0"
   },
