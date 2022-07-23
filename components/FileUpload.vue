@@ -35,7 +35,7 @@ export default {
     drop(event) {
       this.drag = true
       const files = event.dataTransfer.files
-      console.log(files[0].name)
+      console.log(files[0])
       const reader = new FileReader()
       reader.onload = event => {
         this.file = event.target.result
