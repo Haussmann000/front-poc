@@ -9,15 +9,14 @@
 
 <script>
 
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/default.css'
+// import VueSlider from 'vue-slider-component'
+// import 'vue-slider-component/theme/default.css'
 import Header from './Header.vue'
 
 export default {
   methods: {
   },
   components: {
-    VueSlider,
     Header,
   },
   name: 'DefaultLayout',
