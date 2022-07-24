@@ -96,8 +96,9 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
-    color: black;
-    background-color:rgb(253, 229, 232);
+    color: rgb(17, 17, 17);
+    background-color:#f5f5f5;
+    border-radius: 5px;
   }
   .v-application p {
     margin-bottom: 0;
