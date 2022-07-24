@@ -40,6 +40,9 @@ export default {
     text-align: center;
     display: flex;
     justify-content: center;
+    width: 100%;
+    color: black;
+    background-color:antiquewhite;
   }
 
 </style>

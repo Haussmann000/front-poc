@@ -1,4 +1,5 @@
 <template>
+  <div>
         <v-card-actions class="btn-wrapper">
           <v-btn>
             <div class="upload">
@@ -16,31 +17,45 @@
             :class="{ enter: drag }"
           >
           <p>
-            ここにファイルをドラッグしてください
+            CSVファイルをドラッグしてください
           </p>
           </div>
         </v-card-actions>
+        <FileDisplayVue :files="files"></FileDisplayVue>
+  </div>
 </template>
 <script>
+import FileDisplayVue from './FileDisplay.vue'
 export default {
+  props: {
+  },
   name: 'Draggable',
   name: 'FileUpload',
+  name: 'FileDisplay',
+  components: {
+    FileDisplayVue
+  },
   data() {
     return {
       drag: false,
-      file: []
+      files: [],
     }
   },
   methods: {
+    display(files) {
+      Array.from(files).forEach(file => {
+        this.files.push(file.name)
+      })
+    },
     drop(event) {
       this.drag = true
       const files = event.dataTransfer.files
-      console.log(files[0])
+      this.display(files)
       const reader = new FileReader()
       reader.onload = event => {
         this.file = event.target.result
       }
-      reader.readAsDataURL(files[0])
+      // reader.readAsDataURL(files[0])
       this.drag = false
     },
     dragleave() {
@@ -56,19 +71,22 @@ export default {
     padding: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   }
+  .v-application p {
+    margin-bottom: 0;
+  }
   .drop-area {
     width: 80%;
     height: 200px;
-    background-color: rgb(63, 71, 73);
+    background-color: rgb(0, 5, 100);
     color: rgb(215, 247, 255);
-    border-radius: 5px;
+    border-radius: 15px;
     margin: 15px;
     padding: 5px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-content: center;
-    border: 3px dashed rgb(24, 141, 173);
+    border: 3px dashed aliceblue;
     cursor: pointer;
   }
   .drop-area p {

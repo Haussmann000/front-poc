@@ -1,14 +1,9 @@
 <template>
-  <v-app dark>
+  <v-app>
+    <Header :title="title"></Header>
       <v-container>
         <Nuxt />
       </v-container>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -16,11 +11,14 @@
 
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
-
+import Header from './Header.vue'
 
 export default {
+  methods: {
+  },
   components: {
-    VueSlider
+    VueSlider,
+    Header,
   },
   name: 'DefaultLayout',
   data () {
@@ -28,26 +26,8 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'FileUploader'
     }
   }
 }
-
-
-
 </script>
