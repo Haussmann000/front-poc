@@ -1,17 +1,10 @@
 <template>
-  <div>
+  <div class="fileUploadWrapper">
     <v-card-title class="headline">
       {{ ext.toUpperCase() }}ファイルをアップロード
     </v-card-title>
     <v-card-actions class="btn-wrapper">
-      <v-btn
-        :disabled="!files.length"
-        color="primary"
-      >
-        <div>
-          <p>Upload</p>
-        </div>
-      </v-btn>
+
       <div
         class="drop-area"
         @dragenter="drag = true"
@@ -31,6 +24,14 @@
         {{ alertMessage }}
       </p>
     </div>
+    <v-btn
+        :disabled="!files.length"
+        color="primary"
+      >
+        <div>
+          <p>Upload</p>
+        </div>
+      </v-btn>
   </div>
 </template>
 <script>
@@ -81,6 +82,12 @@ export default {
     margin: 0;
     padding: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+  .fileUploadWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
   }
   .headline {
     font-size: 3rem;
@@ -135,6 +142,7 @@ export default {
   }
   .alertText {
     color: green;
+    padding-top: 10px;
     padding-bottom: 10px;
   }
 
