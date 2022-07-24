@@ -7,8 +7,8 @@
             <div v-if="files" class="fileIconWrapper">
               <img class="fileicon" src="@/assets/img/document_icon.png" alt="document icon">
             </div>
-            <p>
-              {{ convertLength(filename) }}
+            <p class="fileNameText">
+              {{ elipsisizeFileName(filename) }}
             </p>
             <div 
              class="deleteButton"
@@ -34,8 +34,9 @@
       }
     },
     methods: {
-    convertLength(fileName) {
-      return fileName.length < maxLength ? fileName : `${fileName.substr(0, maxLength)}...${fileName.split(".").pop()}`
+    elipsisizeFileName(file) {
+      const filename = file.name
+      return filename.length < maxLength ? filename : `${filename.substr(0, maxLength)}...${filename.split(".").pop()}`
     },
     deleteItem(index) {
       this.files.splice(index, 1)
@@ -86,10 +87,10 @@
     padding: 15px;
     border-radius: 5px;
     cursor: pointer;
+  }
+  .fileNameText {
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-  p {
     margin-bottom: 0;
   }
   li {

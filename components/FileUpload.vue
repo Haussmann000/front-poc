@@ -25,14 +25,15 @@
       </p>
       </div>
     </v-card-actions>
-    <!-- <FileDisplayVue :files="files" /> -->
+    <FileDisplayVue :files="files" />
     <div class="alertArea">
-      {{ alertMessage }}
+      <p class="alertText">
+        {{ alertMessage }}
+      </p>
     </div>
   </div>
 </template>
 <script>
-import { isClassPrivateMethod } from '@babel/types'
 import FileDisplayVue from './FileDisplay.vue'
 export default {
   name: 'FileUpload',
@@ -49,23 +50,18 @@ export default {
     }
   },
   methods: {
-    display(files) {
-      Array.from(files).forEach(file => {
-        this.files.push(file.name)
-      })
-    },
     checkExt(file) {
-      const allowedFileExt = `/(.*\.${this.ext}$)/g`
-      const alert = "CSV only!"
-      return file.match(allowedFileExt) ? file : alert
+      const allowedFileExt = `.*\.${this.ext}$`
+      return file.match(allowedFileExt)
+    },
+    toggleMessage() {
+      return !this.files.length ? `アップロードできるのは${this.ext}ファイルのみです` : ""
     },
     drop(event) {
       this.drag = true
       const files = event.dataTransfer.files
       this.files = Array.from(files).filter(e => this.checkExt(e.name))
-      // Array.from(files).forEach(e => console.log(e.name))
-      console.log(this.files)
-      this.display(this.files)
+      this.alertMessage = this.toggleMessage()
       const reader = new FileReader()
       reader.onload = event => {
         this.file = event.target.result
@@ -131,6 +127,15 @@ export default {
   .headline {
     font-size: 3rem;
     margin: 0 auto;
+  }
+
+  .alertArea {
+    display: flex;
+    justify-content: center;
+  }
+  .alertText {
+    color: green;
+    padding-bottom: 10px;
   }
 
 </style>
