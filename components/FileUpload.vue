@@ -1,35 +1,40 @@
 <template>
   <div>
-        <v-card-actions class="btn-wrapper">
-          <v-btn>
-            <div class="upload">
-              <p>
-                Upload
-              </p>
-            </div>
-          </v-btn>
-          <div
-            class="drop-area"
-            @dragenter="drag = true"
-            @dragover.prevent="drag = true"
-            @drop.prevent="drop"
-            @dragleave="dragleave()"
-            :class="{ enter: drag }"
-          >
-          <p>
-            CSVファイルをドラッグしてください
-          </p>
-          </div>
-        </v-card-actions>
-        <FileDisplayVue :files="files"></FileDisplayVue>
+    <v-card-title class="headline">
+      {{ ext.toUpperCase() }}ファイルをアップロード
+    </v-card-title>
+    <v-card-actions class="btn-wrapper">
+      <v-btn
+        :disabled="!files.length"
+        color="primary"
+      >
+        <div>
+          <p>Upload</p>
+        </div>
+      </v-btn>
+      <div
+        class="drop-area"
+        @dragenter="drag = true"
+        @dragover.prevent="drag = true"
+        @drop.prevent="drop"
+        @dragleave="dragleave()"
+        :class="{ enter: drag }"
+      >
+      <p>
+        ファイルをドラッグしてください
+      </p>
+      </div>
+    </v-card-actions>
+    <!-- <FileDisplayVue :files="files" /> -->
+    <div class="alertArea">
+      {{ alertMessage }}
+    </div>
   </div>
 </template>
 <script>
+import { isClassPrivateMethod } from '@babel/types'
 import FileDisplayVue from './FileDisplay.vue'
 export default {
-  props: {
-  },
-  name: 'Draggable',
   name: 'FileUpload',
   name: 'FileDisplay',
   components: {
@@ -39,6 +44,8 @@ export default {
     return {
       drag: false,
       files: [],
+      alertMessage: "",
+      ext: "csv",
     }
   },
   methods: {
@@ -47,10 +54,18 @@ export default {
         this.files.push(file.name)
       })
     },
+    checkExt(file) {
+      const allowedFileExt = `/(.*\.${this.ext}$)/g`
+      const alert = "CSV only!"
+      return file.match(allowedFileExt) ? file : alert
+    },
     drop(event) {
       this.drag = true
       const files = event.dataTransfer.files
-      this.display(files)
+      this.files = Array.from(files).filter(e => this.checkExt(e.name))
+      // Array.from(files).forEach(e => console.log(e.name))
+      console.log(this.files)
+      this.display(this.files)
       const reader = new FileReader()
       reader.onload = event => {
         this.file = event.target.result
@@ -71,14 +86,25 @@ export default {
     padding: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   }
+  .headline {
+    font-size: 3rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: black;
+    background-color:rgb(253, 229, 232);
+  }
   .v-application p {
     margin-bottom: 0;
   }
   .drop-area {
+    user-select: none;
     width: 80%;
     height: 200px;
-    background-color: rgb(0, 5, 100);
-    color: rgb(215, 247, 255);
+    background-color: rgb(236, 237, 255);
+    color: rgb(86, 86, 86);
     border-radius: 15px;
     margin: 15px;
     padding: 5px;
@@ -86,7 +112,7 @@ export default {
     display: flex;
     justify-content: center;
     align-content: center;
-    border: 3px dashed aliceblue;
+    border: 3px dashed rgb(153, 207, 255);
     cursor: pointer;
   }
   .drop-area p {
@@ -98,8 +124,9 @@ export default {
     flex-direction: column;
   }
   .enter.drop-area {
-    border: 2px dashed #1867c0;
-    background: #d4e8ff;
+    border: 3px dashed rgb(50, 159, 255);
+    background-color: rgb(209, 210, 235);
+    color: rgb(128, 120, 120);
   }
   .headline {
     font-size: 3rem;

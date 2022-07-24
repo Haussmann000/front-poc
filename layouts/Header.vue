@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    {{ title }}
+    <p>
+      {{ title }}
+    </p>
   </div>
 </template>
 
@@ -18,11 +20,16 @@
 
 <style>
   .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    margin-bottom: 60px;
     color: rgb(75, 75, 75);
-    background-color: #f5f5f5;
+    background-color: rgb(213, 215, 252);
     font-size: 2rem;
     text-align: center;
-    padding: 10px;
+    padding: 24px;
     font-family: "Titillium Web"
   }
 </style>

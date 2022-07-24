@@ -2,12 +2,20 @@
   <div>
     <div class="display_area">
       <div class="fileListWrapper">
-        <li v-for="value in files" :key="value" class="filename">
-          <div v-if="files">
-            <img class="fileicon" src="@/assets/img/document_icon.png" alt="document icon">
-          </div>
+        <li v-for="filename,index in files" :key="index"  class="filename">
           <div class="fileNameList">
-            {{ value }}
+            <div v-if="files" class="fileIconWrapper">
+              <img class="fileicon" src="@/assets/img/document_icon.png" alt="document icon">
+            </div>
+            <p>
+              {{ convertLength(filename) }}
+            </p>
+            <div 
+             class="deleteButton"
+             @click="deleteItem(index)"
+            >
+              <img src="@/assets/img/delete.png" alt="">
+            </div>
           </div>
         </li>
       </div>
@@ -16,6 +24,7 @@
 </template>
 
 <script>
+  const maxLength = 29;
 	export default {
     name: 'FileDisplay',
     props: ['files'],
@@ -25,7 +34,12 @@
       }
     },
     methods: {
-
+    convertLength(fileName) {
+      return fileName.length < maxLength ? fileName : `${fileName.substr(0, maxLength)}...${fileName.split(".").pop()}`
+    },
+    deleteItem(index) {
+      this.files.splice(index, 1)
+    },
     }
 	}
 </script>
@@ -40,29 +54,58 @@
     width: 50px;
     display: inline;
   }
+  .fileIconWrapper {
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 5px;
+  }
   .fileListWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
   }
   .filename {
     display: flex;
     margin: 15px;
     flex-direction: row;
+    align-items: center;
+    /* width: 500px; */
+    justify-content: space-between;
   }
   .fileNameList {
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* width: 300px; */
-    /* white-space: pre-line; */
+    justify-content: flex-start;
+    text-align: center;
+    user-select: none;
+    width: 100%;
     height: 100%;
     background-color: #f5f5f5;
     padding: 15px;
     border-radius: 5px;
     cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  p {
+    margin-bottom: 0;
   }
   li {
     list-style-type: none;
+  }
+  .fileNameList:hover {
+    /* background-color: #555; */
+    opacity: .6;
+  }
+  .deleteButton {
+    width: 50px;
+    height: 50px;
+    /* background-image: url("@/assets/img/delete.png"); */
+    margin-left: auto;
+  }
+  .deleteButton:hover {
+    filter: contrast(10%)
   }
 </style>
