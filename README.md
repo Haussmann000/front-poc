@@ -9,6 +9,9 @@
 - `npm install webpack@4.46.0`
 - `npm install @nuxtjs/vuetify@1.12.3`
 
+- AWS SAM
+  - `aws configure`
+
 ## Build Setup
 
 ```bash
