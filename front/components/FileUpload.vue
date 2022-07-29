@@ -77,7 +77,7 @@ export default {
 }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
   html, body {
     margin: 0;
     padding: 0;
@@ -96,8 +96,8 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
-    color: rgb(17, 17, 17);
-    background-color:#f5f5f5;
+    color: $dark-gray;
+    background-color:$pale-white;
     border-radius: 5px;
   }
   .v-application p {
@@ -107,8 +107,8 @@ export default {
     user-select: none;
     width: 80%;
     height: 200px;
-    background-color: rgb(236, 237, 255);
-    color: rgb(86, 86, 86);
+    background-color: $pale-white;
+    color: $dark-gray;
     border-radius: 15px;
     margin: 15px;
     padding: 5px;
@@ -116,21 +116,21 @@ export default {
     display: flex;
     justify-content: center;
     align-content: center;
-    border: 3px dashed rgb(153, 207, 255);
+    border: 3px dashed $root-blue;
     cursor: pointer;
-  }
-  .drop-area p {
-    align-self: center;
+    &p {
+       align-self: center;
+    }
+    &.enter {
+      border: 3px dashed $root-blue;
+      background-color: $pale-blue;
+      color: $root-gray;
+    }
   }
   .btn-wrapper, .v-sheet {
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
-  .enter.drop-area {
-    border: 3px dashed rgb(50, 159, 255);
-    background-color: rgb(209, 210, 235);
-    color: rgb(128, 120, 120);
   }
   .headline {
     font-size: 3rem;
@@ -142,7 +142,7 @@ export default {
     justify-content: center;
   }
   .alertText {
-    color: green;
+    color: $root-green;
     padding-top: 10px;
     padding-bottom: 10px;
   }

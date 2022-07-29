@@ -9,8 +9,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - bitcampus-test',
-    title: 'bitcampus-test',
+    titleTemplate: '%s - fileuploader-test',
+    title: 'fileuploader-test',
     htmlAttrs: {
       lang: 'en'
     },

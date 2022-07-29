@@ -45,7 +45,7 @@
 	}
 </script>
 
-<style scoped>
+<style scoped  lang="scss">
   .display_area {
     display: flex;
     flex-direction: center;
