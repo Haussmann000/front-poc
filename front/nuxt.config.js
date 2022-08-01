@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -67,5 +68,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    plugins: [
+      new VuetifyLoaderPlugin()
+    ],
+    transpile: [/^vuetify/],
   }
 }

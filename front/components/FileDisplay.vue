@@ -56,7 +56,7 @@
     display: inline;
   }
   .fileIconWrapper {
-    background-color: #fff;
+    background-color: white;
     border-radius: 50%;
     padding: 15px;
     margin: 5px;
@@ -72,7 +72,6 @@
     margin: 15px;
     flex-direction: row;
     align-items: center;
-    /* width: 500px; */
     justify-content: space-between;
   }
   .fileNameList {
@@ -83,7 +82,7 @@
     user-select: none;
     width: 100%;
     height: 100%;
-    background-color: #f5f5f5;
+    background-color: $pale-gray;
     padding: 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -97,13 +96,11 @@
     list-style-type: none;
   }
   .fileNameList:hover {
-    /* background-color: #555; */
     opacity: .6;
   }
   .deleteButton {
     width: 50px;
     height: 50px;
-    /* background-image: url("@/assets/img/delete.png"); */
     margin-left: auto;
   }
   .deleteButton:hover {
