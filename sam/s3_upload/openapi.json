@@ -2,9 +2,9 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "1.0",
-    "title" : "csvtest"
+    "title" : "s3upload"
   },
-  "host" : "koofak6zfa.execute-api.ap-northeast-1.amazonaws.com",
+  "host" : "12345abcde.execute-api.ap-northeast-1.amazonaws.com",
   "basePath" : "/v1",
   "schemes" : [ "https" ],
   "paths" : {
