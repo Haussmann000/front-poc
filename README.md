@@ -12,22 +12,23 @@
 - `npm install @nuxtjs/vuetify@1.12.3`
 - （Linuxの場合）node_install.shを実行
 
-### 起動
+### フロント側起動
 - `cd front`
 - `yarn install`
 - `yarn dev`
 
-## AWS SAM
+## AWS SAMの初期化
 - 下記よりダウンロード
   - Windows：https://github.com/awslabs/aws-sam-cli/releases/latest/download/AWS_SAM_CLI_64_PY3.msi
   - Linux：https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
 - `sam --version`で確認
 - `aws configure`
-- `csvtest/`で下記を実行
+- `sam/s3_upload/`で下記を実行
   - `sam deploy`
   - デプロイ設定は`samconfig.toml`にあります
-    - 
 
+## APIのURL
+- https://12345abcde.execute-api.ap-northeast-1.amazonaws.com/v1/{S3プレフィクス}/{ローカルのファイル名}
 
 
 ## ローカルでビルド

@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: '---'
+Parameters:
+  ApiName:
+    Description: API Gateway Name
+    Type: String
+  StageName:
+    Description: v1
+    Type: String
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name:
+        Ref: ApiName
+      EndpointConfiguration: REGIONAL
+      OpenApiVersion: 3.0.1
+      StageName:
+        Ref: StageName
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: ../../openapi.json
