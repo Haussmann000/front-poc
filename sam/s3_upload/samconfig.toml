@@ -2,10 +2,10 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "s3upload"
+stack_name = "fileupload"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1elvpadr379a5"
-s3_prefix = "s3upload"
+s3_prefix = "fileupload"
 region = "ap-northeast-1"
 capabilities = "CAPABILITY_IAM"
-parameter_overrides = "ApiName=\"s3upload\" StageName=\"v1\""
+parameter_overrides = "ApiName=\"fileupload\" StageName=\"v1\" S3BucketName=\"fileupload\""
 image_repositories = []

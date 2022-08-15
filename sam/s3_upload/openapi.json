@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "1.0",
-    "title" : "s3upload"
+    "title" : "fileupload"
   },
   "host" : "12345abcde.execute-api.ap-northeast-1.amazonaws.com",
   "basePath" : "/v1",

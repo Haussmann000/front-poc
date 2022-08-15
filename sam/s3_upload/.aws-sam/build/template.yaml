@@ -8,13 +8,17 @@ Parameters:
   StageName:
     Description: v1
     Type: String
+  S3BucketName:
+    Description: Type of this BacketName.
+    Type: String
+    Default: fileupload
 Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
       Name:
         Ref: ApiName
-      EndpointConfiguration: REGIONAL
+      EndpointConfiguration: EDGE
       OpenApiVersion: 3.0.1
       StageName:
         Ref: StageName
@@ -23,3 +27,33 @@ Resources:
           Name: AWS::Include
           Parameters:
             Location: ../../openapi.json
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: ${S3BucketName}-${AWS::AccountId}
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Action: s3:*
+          Effect: Allow
+          Resource:
+          - Fn::GetAtt:
+            - S3Bucket
+            - Arn
+          - Fn::Sub: ${S3Bucket.Arn}/*
+          Principal:
+            AWS:
+            - '*'
+Outputs:
+  S3BucketName:
+    Value:
+      Ref: S3BucketName
