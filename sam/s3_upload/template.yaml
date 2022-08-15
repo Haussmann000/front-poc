@@ -32,6 +32,11 @@ Resources:
       AccessControl: Private
       VersioningConfiguration:
         Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
   S3BucketPolicy:
     Type: "AWS::S3::BucketPolicy"
     Properties:
