@@ -18,7 +18,7 @@ Resources:
     Properties:
       Name:
         Ref: ApiName
-      EndpointConfiguration: EDGE
+      EndpointConfiguration: REGIONAL
       OpenApiVersion: 3.0.1
       StageName:
         Ref: StageName
@@ -35,18 +35,13 @@ Resources:
       AccessControl: Private
       VersioningConfiguration:
         Status: Enabled
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: true
-        BlockPublicPolicy: true
-        IgnorePublicAcls: true
-        RestrictPublicBuckets: true
   S3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
       Bucket:
         Ref: S3Bucket
       PolicyDocument:
-        Version: 2012-10-17
+        Version: '2012-10-17'
         Statement:
           Action: s3:*
           Effect: Allow
@@ -58,6 +53,35 @@ Resources:
           Principal:
             AWS:
             - '*'
+  S3PutRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - apigateway.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Description: Allows S3 to call AWS services on your behalf.
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
+      RoleName: fileupload-s3-putobject
+      Policies:
+      - PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Effect: Allow
+            Action:
+            - s3:PutObject
+            Resource:
+            - Fn::GetAtt:
+              - S3Bucket
+              - Arn
+            - Fn::Sub: '*'
+        PolicyName: fileupload-putobject
 Outputs:
   S3BucketName:
     Value:

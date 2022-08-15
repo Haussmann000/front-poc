@@ -41,7 +41,7 @@
           }
         },
         "x-amazon-apigateway-integration" : {
-          "credentials" : "arn:aws:iam::987359833978:role/csvtest-s3-putobject",
+          "credentials" : "arn:aws:iam::987359833978:role/fileupload-s3-putobject",
           "httpMethod" : "PUT",
           "uri" : "arn:aws:apigateway:ap-northeast-1:s3:path/{bucket}/{key}",
           "responses" : {
